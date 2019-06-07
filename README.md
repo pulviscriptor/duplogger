@@ -1,18 +1,18 @@
 # Duplogger
 
-Small logger for Node.JS with colors.
-Run `node ./node_modules/duplogger/test.js` to see demo:
+Small logger for Node.JS with colors.  
+Run `node ./node_modules/duplogger/test.js` to see demo:  
 
 <todo: img>
 
 
 ## Another logger?
 
-There is over `5000` "logger" search result on NPM so probably this logger already exists out there. 
-But I made this logger long time ago with features that I need and got tired of copy-pasting .js file into different projects. 
-When I change something, I have to update .js file in all my projects. 
-So I finally decided to publish it on NPM for myself. But what if someone would like to use it too, then I need to make nice README. 
-So that's why you read this.
+There is over `5000` "logger" search result on NPM so probably this logger already exists out there.  
+But I made this logger long time ago with features that I need and got tired of copy-pasting .js file into different projects.  
+When I change something, I have to update .js file in all my projects.  
+So I finally decided to publish it on NPM for myself. But what if someone would like to use it too, then I need to make nice README.  
+So that's why you read this.  
 
 ## Installation
 
@@ -21,20 +21,20 @@ So that's why you read this.
 
 ## How to use
 
-I will describe how I use it. You may disagree with mine approach and use your own. 
-I don't like loggers with logging levels like: 
+I will describe how I use it. You may disagree with mine approach and use your own.  
+I don't like loggers with logging levels like:  
 ```javascript
 logger.log(3, 'Dump users: ' + users.dumpUserList()); // 3 is log level
 ```
-That way `users.dumpUserList()` will execute even if we have logging level set to `2` or lower. We will just waste CPU resources for nothing. 
+That way `users.dumpUserList()` will execute even if we have logging level set to `2` or lower. We will just waste CPU resources for nothing.  
 Instead, I like to do: 
 ```javascript
 if(debug >= 3)
     logger.log('Dump users: ' + users.dumpUserList());
 ```
-That way `users.dumpUserList()` will be called only if we have log level `3` or higher. 
-Check `test.js` for example code. 
-Also you may want to loot at `duplogger.js` just to see code of `duplogger`. Its small file. 
+That way `users.dumpUserList()` will be called only if we have log level `3` or higher.  
+Check `test.js` for example code.  
+Also you may want to loot at `duplogger.js` just to see code of `duplogger`. Its small file.  
 
 
 ### Configuring
@@ -42,7 +42,7 @@ Also you may want to loot at `duplogger.js` just to see code of `duplogger`. Its
 ```javascript
 const Duplogger = require('duplogger');
 ```
-After that you can change some variables. Once you change something it will be used for all instances of logger in all files.
+After that you can change some variables. Once you change something it will be used for all instances of logger in all files.  
 
  - `Duplogger.colors` - colors that available for `log.colorize` and rotation array. You can delete/add/modify colors. Check `duplogger.js`
  - `Duplogger.colors_rotate` - array of color names for rotation. Every instance of `Duplogger` will use new color from list.
@@ -53,18 +53,18 @@ After that you can change some variables. Once you change something it will be u
  
 ##### Duplogger.in_tty
 
-When you `require('duplogger')` for first time it tries to detect are you running in `tty` (terminal/console) or you pipe output somewhere using Node.JS's [isatty](https://nodejs.org/api/tty.html#tty_tty_isatty_fd) like `node app.js > file.log` 
-If `duplogger` detects that you are not `tty` then colors will be disabled and all errors will be duplicated to `stdout`. So running `node app.js > file.log` will log errors both to `strout` and `stderr`. 
-You can force enable/disable colors using `Duplogger.in_tty = true or false;`
-Duplogger without colors looks like this: 
+When you `require('duplogger')` for first time it tries to detect are you running in `tty` (terminal/console) or you pipe output somewhere using Node.JS's [isatty](https://nodejs.org/api/tty.html#tty_tty_isatty_fd) like `node app.js > file.log`  
+If `duplogger` detects that you are not `tty` then colors will be disabled and all errors will be duplicated to `stdout`. So running `node app.js > file.log` will log errors both to `strout` and `stderr`.  
+You can force enable/disable colors using `Duplogger.in_tty = true or false;`  
+Duplogger without colors looks like this:   
 
 <TODO: image>
 
 
 ### Logger API
 
-After you done `const Duplogger = require('duplogger')` you can create loggers like `let log = new Duplogger(id)`. 
-`id` can be any string you want. Like `Webserver` or `User(somename)` or what you think is best to debug your app. 
+After you did `const Duplogger = require('duplogger')` you can create loggers like `let log = new Duplogger(id)`.  
+`id` can be any string you want. Like `Webserver` or `User(somename)` or what you think is best to debug your app.  
 
  - `log.id` - `string` - id of current logger. You can change it any time
  - `log.color_name` - `string` - name of color that `Duplogger.getNewColor` generated for us. You can change it any time
@@ -94,9 +94,9 @@ After you done `const Duplogger = require('duplogger')` you can create loggers l
  - `log.blink` - blinking text. (**May not work**. Depends on fonts that you use in your terminal. I never use it anyway) 
    - `log.blink(text)` - alias for `log.colorize({blink: true}, text)`
    - `log.blink(color, text)` - alias for `log.colorize({color: color, blink: true}, text)`
- - `log.child(id)` - creates new instance from current instance. Will add parent `id`. If we have `log.id = 'Server'` then `child('IncommingConnection')` will create new logger with `log.id = 'Server>IncommingConnection'`.  
+ - `log.child(id)` - creates new instance from current instance. Will add parent `id`. If we have `log.id = 'Server'` then `child('IncommingConnection')` will create new logger with `log.id = 'Server>IncommingConnection'`.   
      Run `node ./node_modules/duplogger/test.js` to see how it works.
 
 #### Good luck!
 
-And I recommend to look at source code of `test.js` and `duplogger.js` to see how I use duplogger and source of it to check color names and other stuff. 
+And I recommend to look at source code of `test.js` and `duplogger.js` to see how I use duplogger and source of it to check color names and other stuff.  
