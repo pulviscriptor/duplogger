@@ -3,7 +3,7 @@
 Small logger for Node.JS with colors.  
 Run `node ./node_modules/duplogger/test.js` to see demo:  
 
-<todo: img>
+![screenshot](https://raw.githubusercontent.com/pulviscriptor/duplogger/master/demo/screen_colors.png)
 
 
 ## Another logger?
@@ -58,7 +58,7 @@ If `duplogger` detects that you are not `tty` then colors will be disabled and a
 You can force enable/disable colors using `Duplogger.in_tty = true or false;`  
 Duplogger without colors looks like this:   
 
-<TODO: image>
+![screenshot](https://raw.githubusercontent.com/pulviscriptor/duplogger/master/demo/screen_no_colors.png)
 
 
 ### Logger API
