@@ -1,0 +1,24 @@
+{
+  "name": "duplogger",
+  "version": "1.0.0",
+  "description": "Small logger with colors for Node.JS",
+  "main": "duplogger.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulviscriptor/duplogger.git"
+  },
+  "keywords": [
+    "logger",
+	"logging",
+	"log"
+  ],
+  "author": "pulviscriptor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pulviscriptor/duplogger/issues"
+  },
+  "homepage": "https://github.com/pulviscriptor/duplogger#readme"
+}
