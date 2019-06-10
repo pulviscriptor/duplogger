@@ -1,18 +1,15 @@
 # Duplogger
 
-Small logger for Node.JS with colors.  
-Run `node ./node_modules/duplogger/test.js` to see demo:  
+A minimalist logger for Node.JS with color schemes.  
+Execute `node ./node_modules/duplogger/test.js` to run the demo:  
 
 ![screenshot](https://raw.githubusercontent.com/pulviscriptor/duplogger/master/demo/screen_colors.png)
 
 
-## Another logger?
+## Yet another logger
 
-There is over `5000` "logger" search result on NPM so probably this logger already exists out there.  
-But I made this logger long time ago with features that I need and got tired of copy-pasting .js file into different projects.  
-When I change something, I have to update .js file in all my projects.  
-So I finally decided to publish it on NPM for myself. But what if someone would like to use it too, then I need to make nice README.  
-So that's why you read this.  
+The search "logger" yields more than `5000` results on NPM so it's likely there are similar modules. It is a set of features I find useful. In order to maintain and deploy the module, I decided to publish it on NPM.  
+
 
 ## Installation
 
@@ -21,23 +18,24 @@ So that's why you read this.
 
 ## How to use
 
-I will describe how I use it. You may disagree with mine approach and use your own.  
-I don't like loggers with logging levels like:  
+The following approach is my preferred way of calling the API. If you don't like it, you may skip to Configuring.  
+  
+I don't like loggers with logging levels like:
 ```javascript
-logger.log(3, 'Dump users: ' + users.dumpUserList()); // 3 is log level
+otherLogger.log(3, 'Dump users: ' + users.dumpUserList()); // 3 is the log level
 ```
-That way `users.dumpUserList()` will execute even if we have logging level set to `2` or lower. We will just waste CPU resources for nothing.  
-Instead, I like to do: 
+I find it to be flawed because `users.dumpUserList()` will execute regardless of the logging level. If the logging level equals or less than `2`, the call will simply waste the resources and produce no results.  
+Instead, I advice to check the logging level beforehand:
 ```javascript
 if(debug >= 3)
     logger.log('Dump users: ' + users.dumpUserList());
 ```
-That way `users.dumpUserList()` will be called only if we have log level `3` or higher.  
+That way the call `users.dumpUserList()` will only trigger if the log level equals or higher than 3.  
 Check `test.js` for example code.  
-Also you may want to loot at `duplogger.js` just to see code of `duplogger`. Its small file.  
+Also you may want to check the `duplogger.js` where the source code is located. It's a small file.  
 
 
-### Configuring
+## Configuring
 
 ```javascript
 const Duplogger = require('duplogger');
@@ -46,7 +44,7 @@ After that you can change some variables. Once you change something it will be u
 
  - `Duplogger.colors` - colors that available for `log.colorize` and rotation array. You can delete/add/modify colors. Check `duplogger.js`
  - `Duplogger.colors_rotate` - array of color names for rotation. Every instance of `Duplogger` will use new color from list.
- - `Duplogger.stdout` - `function(text)` - you can create your oun function that will receive `stdout` so you can save/send it somewhere.
+ - `Duplogger.stdout` - `function(text)` - you can create your own function that will receive `stdout` so you can save/send it somewhere.
  - `Duplogger.stderr` - same as `Duplogger.stdout` but for `stderr`
  - `Duplogger.getNewColor(id)` - function that rotates color. You can replace it with your own to generate colors based on `id`. Return color name.
  - `Duplogger.in_tty` - `true/false` - enable/disable colors. Check more detailed explanation below.
@@ -61,7 +59,7 @@ Duplogger without colors looks like this:
 ![screenshot](https://raw.githubusercontent.com/pulviscriptor/duplogger/master/demo/screen_no_colors.png)
 
 
-### Logger API
+## Logger API
 
 After you did `const Duplogger = require('duplogger')` you can create loggers like `let log = new Duplogger(id)`.  
 `id` can be any string you want. Like `Webserver` or `User(somename)` or what you think is best to debug your app.  
@@ -99,4 +97,4 @@ After you did `const Duplogger = require('duplogger')` you can create loggers li
 
 #### Good luck!
 
-And I recommend to look at source code of `test.js` and `duplogger.js` to see how I use duplogger and source of it to check color names and other stuff.  
+And I recommend to look at source code of `test.js` and `duplogger.js` to see how I use duplogger and source of it to check color names and other stuff.
